@@ -30,7 +30,8 @@ st.set_page_config(
     layout="centered",  # Use centered layout instead of wide
     initial_sidebar_state="collapsed"
 )
-st.title(f"NBA Games - {today}")
+st.title("Udhay's NBA Dashboard")
+st.markdown(f"### {today}", unsafe_allow_html=True)
 
 # -------------------------------
 # GET DATA
