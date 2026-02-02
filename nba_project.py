@@ -25,7 +25,11 @@ from datetime import date
 today = date.today().strftime("%A, %B %d, %Y")
 
 
-st.set_page_config(page_title="NBA Games Today", layout="wide")
+st.set_page_config(
+    page_title="NBA Games Today",
+    layout="centered",  # Use centered layout instead of wide
+    initial_sidebar_state="collapsed"
+)
 st.title(f"NBA Games - {today}")
 
 # -------------------------------
@@ -58,7 +62,7 @@ for game in games:
     )
     st.markdown(f"<div style='{container_style}'>", unsafe_allow_html=True)
 
-    col1, col2, col3 = st.columns([3, 1, 3])
+    col1, col2, col3 = st.columns([3, 1, 3], gap="small")
 
     # Determine score color for finished games
     if is_final:
@@ -70,12 +74,12 @@ for game in games:
     # ---------------- AWAY TEAM ----------------
     with col1:
         st.markdown(
-            f"<div style='text-align:center; padding:10px; border-radius:8px'>",
+            f"<div style='text-align:center; padding:5px; border-radius:8px'>",
             unsafe_allow_html=True
         )
         st.image(
             f"https://cdn.nba.com/logos/nba/{away['teamId']}/global/L/logo.svg",
-            width=120
+            width=90
         )
         st.markdown(
             f"<h3>{away['teamCity']} {away['teamName']}</h3>",
@@ -101,12 +105,12 @@ for game in games:
     # ---------------- HOME TEAM ----------------
     with col3:
         st.markdown(
-            f"<div style='text-align:center; padding:10px; border-radius:8px'>",
+            f"<div style='text-align:center; padding:5px; border-radius:8px'>",
             unsafe_allow_html=True
         )
         st.image(
             f"https://cdn.nba.com/logos/nba/{home['teamId']}/global/L/logo.svg",
-            width=120
+            width=90
         )
         st.markdown(
             f"<h3>{home['teamCity']} {home['teamName']}</h3>",
