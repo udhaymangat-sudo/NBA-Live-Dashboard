@@ -2,8 +2,10 @@ import requests
 import pandas as pd
 import streamlit as st
 from difflib import get_close_matches
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
+import time
 import pytz
+
 
 # -------------------------------
 # GET TODAY'S DATE
@@ -74,6 +76,14 @@ for game in games:
                break
     # ---------- GET GAME STATUS ----------
     commence_time = game["commence_time"]
+    commence_utc = datetime.fromisoformat(commence_time.replace("Z", "+00:00"))
+    utc = pytz.UTC
+    pst = pytz.timezone("America/Los_Angeles")
+    commence_utc = utc.localize(commence_utc.replace(tzinfo=None))
+    commence_pst = commence_utc.astimezone(pst)
+    commence_minus_10 = commence_pst - timedelta(minutes=10)
+    time_only_str = commence_minus_10.strftime("%I:%M %p")  # "03:10:38"
+
     # ---------- MAP NBA TEAMS ----------
     team_ids = {"Atlanta Hawks": 1610612737,
     "Boston Celtics": 1610612738,
@@ -143,7 +153,7 @@ for game in games:
     # Game has not started yet
             is_final = False
             is_live = False
-            status_text = f"Starts at {commence_time}"
+            status_text = f"Starts at {time_only_str}"
         st.markdown(f"<div style='text-align:center'><h4>{status_text}</h4></div>", unsafe_allow_html=True)
     # ---------- HOME COLUMN ----------
     with col_home:
@@ -169,6 +179,6 @@ for game in games:
     col_odds = st.columns([1])
     with col_odds[0]:
        st.markdown(f"<div style='text-align:center'><h3>{over_under_text}</h3></div>", unsafe_allow_html=True)
-        
 
     st.divider()
+
