@@ -26,10 +26,10 @@ st.markdown(f"<div style='text-align: center; font-size: 30px; font-weight: bold
 # -------------------------------
 API_KEY = "a17a6e90cf7065d09edee849f3f80e98"
 SPORT = "basketball_nba"
-REGION = "us"
+REGION = "espnbet"
 MARKETS = "totals"  # moneyline odds
 
-url = f"https://api.the-odds-api.com/v4/sports/{SPORT}/odds/?apiKey={API_KEY}&regions={REGION}&markets={MARKETS}"
+url = f"https://api.the-odds-api.com/v4/sports/{SPORT}/odds/?apiKey={API_KEY}&bookmakers={REGION}&markets={MARKETS}"
 
 response = requests.get(url)
 games = response.json()
@@ -181,4 +181,3 @@ for game in games:
        st.markdown(f"<div style='text-align:center'><h3>{over_under_text}</h3></div>", unsafe_allow_html=True)
 
     st.divider()
-
