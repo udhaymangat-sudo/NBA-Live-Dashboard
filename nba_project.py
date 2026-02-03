@@ -5,14 +5,6 @@ Created on Mon Feb  2 15:58:31 2026
 
 @author: udhaymangat
 """
-
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-Created on Mon Feb  2 13:56:08 2026
-
-@author: udhaymangat
-"""
 import requests
 import pandas as pd
 import streamlit as st
