@@ -117,26 +117,13 @@ for game in games:
             unsafe_allow_html=True
         )
 
-        # LIVE / FINAL badge
-        if is_live:
-            st.markdown("<div style='text-align:center'>🟢 <b>LIVE</b></div>", unsafe_allow_html=True)
-        elif is_final:
-            st.markdown("<div style='text-align:center'>🏁 <b>FINAL</b></div>", unsafe_allow_html=True)
-
         # @ symbol
         st.markdown("<h2 style='text-align:center'>@</h2>", unsafe_allow_html=True)
 
-        # Arena info
-        arena = game.get("arena")
-        if arena:
-            arena_name = arena.get("name", "")
-            arena_city = arena.get("city", "")
-            if arena_name or arena_city:
-                st.markdown(f"<div style='text-align:center'>{arena_name}, {arena_city}</div>", unsafe_allow_html=True)
 
         # Game status text (quarter/time or FINAL)
         if is_final:
-            status_text = "FINAL"
+            status_text = "🏁 FINAL"
         elif is_live:
             status_text = game.get("gameStatusText", "")
         else:
